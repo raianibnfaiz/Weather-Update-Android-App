@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun WeatherScreen() {
+fun WeatherScreen(weatherViewmodel: WeatherViewmodel) {
     var city by remember {
         mutableStateOf("")
     }
@@ -34,14 +34,14 @@ fun WeatherScreen() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween)   {
 
-                OutlinedTextField(value = city, onValueChange ={
+                OutlinedTextField(modifier = Modifier.weight(1f),value = city, onValueChange ={
                     city = it
                 },
                 label = {
-                        Text(text = "City")
+                        Text(text = "Search for any location")
                     }
                 )
-                IconButton(onClick = {}){
+                IconButton(onClick = {weatherViewmodel.getWeather(city = city)}){
                     Icon(Icons.Filled.Search, contentDescription = "Search")
                 }
         }
